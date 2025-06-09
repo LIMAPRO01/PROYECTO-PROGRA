@@ -2082,6 +2082,18 @@
           }
         }
       }
+    },
+    "/api/Usuarios/actualizar-contraseñas": {
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

@@ -1211,6 +1211,16 @@
   },
   {
     "ContainingType": "BackendClinica.Controllers.UsuariosController",
+    "Method": "ActualizarContrase\u00F1as",
+    "RelativePath": "api/Usuarios/actualizar-contrase\u00F1as",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackendClinica.Controllers.UsuariosController",
     "Method": "Login",
     "RelativePath": "api/Usuarios/login",
     "HttpMethod": "POST",

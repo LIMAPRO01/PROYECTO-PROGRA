@@ -1,18 +1,24 @@
 using BackendClinica.Data;
 using BackendClinica.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendClinica.Controllers
 {
-    [Authorize]
+    
     [ApiController]
     [Route("api/[controller]")]
     public class UsuariosController : ControllerBase
     {
         private readonly ClinicaContext _context;
-        public UsuariosController(ClinicaContext context) { _context = context; }
+        private readonly PasswordHasher<Usuario> _passwordHasher;
+
+        public UsuariosController(ClinicaContext context)
+        {
+            _context = context; _passwordHasher = new PasswordHasher<Usuario>();
+        }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
@@ -29,6 +35,7 @@ namespace BackendClinica.Controllers
         [HttpPost]
         public async Task<ActionResult<Usuario>> CreateUsuario([FromBody] Usuario nuevo)
         {
+            nuevo.contraseña = _passwordHasher.HashPassword(nuevo, nuevo.contraseña);
 
             _context.Usuarios.Add(nuevo);
             await _context.SaveChangesAsync();
@@ -40,11 +47,17 @@ namespace BackendClinica.Controllers
         public IActionResult Login([FromBody] Login login)
         {
             var usuario = _context.Usuarios
-                .FirstOrDefault(u => u.usuario == login.NombreUsuario && u.contraseña == login.Contraseña && u.activo);
+                .FirstOrDefault(u => u.usuario == login.NombreUsuario && u.activo);
 
             if (usuario == null)
             {
-                return Unauthorized( new { mensaje = "Credenciales incorrectas o usuario inactivo." });
+                return Unauthorized(new { mensaje = "Credenciales incorrectas o usuario inactivo." });
+            }
+
+            var result = _passwordHasher.VerifyHashedPassword(usuario, usuario.contraseña, login.Contraseña);
+            if (result == PasswordVerificationResult.Failed)
+            {
+                return Unauthorized(new { mensaje = "Credenciales incorrectas o usuario inactivo." });
             }
 
             return Ok(usuario); // devuelve todo el objeto Usuario
@@ -56,7 +69,16 @@ namespace BackendClinica.Controllers
             var u = await _context.Usuarios.FindAsync(id);
             if (u == null) return NotFound();
             u.usuario = actualizado.usuario;
-            u.contraseña = actualizado.contraseña;
+            // Verificar si la contraseña ha cambiado
+            if (!string.IsNullOrEmpty(actualizado.contraseña))
+            {
+                u.contraseña = _passwordHasher.HashPassword(u, actualizado.contraseña);
+            }
+            else
+            {
+                // Si no se proporciona una nueva contraseña, mantener la actual
+                u.contraseña = u.contraseña;
+            }
             u.rol = actualizado.rol;
             u.idmedico = actualizado.idmedico;
             u.fechaRegistro = actualizado.fechaRegistro;
@@ -73,6 +95,22 @@ namespace BackendClinica.Controllers
             _context.Usuarios.Remove(u);
             await _context.SaveChangesAsync();
             return Ok();
+        }
+
+        [HttpPost("actualizar-contraseñas")]
+        public async Task<ActionResult> ActualizarContraseñas()
+        {
+            var usuarios = await _context.Usuarios.ToListAsync();
+            foreach (var usuario in usuarios)
+            {
+                if (usuario.contraseña.Length <= 30)
+                {
+                    usuario.contraseña = _passwordHasher.HashPassword(usuario, usuario.contraseña);
+                    _context.Usuarios.Update(usuario);
+                }
+            }
+            await _context.SaveChangesAsync();
+            return Ok(new { mensaje = "Contraseñas actualizadas correctamente." });
         }
     }
 }

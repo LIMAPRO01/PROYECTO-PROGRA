@@ -1,13 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Windows\\Desktop\\BackendClinica\\",
+  "WorkspaceRootPath": "C:\\Users\\Mario\\Music\\PROYECTO-TOKEN\\BackendClinica\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|c:\\users\\windows\\desktop\\backendclinica\\controllers\\recetasmedicascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|c:\\users\\mario\\music\\proyecto-token\\backendclinica\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|solutionrelative:controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|c:\\users\\mario\\music\\proyecto-token\\backendclinica\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|c:\\users\\mario\\music\\proyecto-token\\backendclinica\\controllers\\recetasmedicascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|solutionrelative:controllers\\recetasmedicascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|c:\\users\\windows\\desktop\\backendclinica\\models\\recetamedica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|c:\\users\\mario\\music\\proyecto-token\\backendclinica\\models\\recetamedica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{68482E27-C046-D884-5C92-A55012680F08}|BackendClinica.csproj|solutionrelative:models\\recetamedica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -23,23 +31,48 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RecetaMedica.cs",
-              "DocumentMoniker": "C:\\Users\\Windows\\Desktop\\BackendClinica\\Models\\RecetaMedica.cs",
-              "RelativeDocumentMoniker": "Models\\RecetaMedica.cs",
-              "ToolTip": "C:\\Users\\Windows\\Desktop\\BackendClinica\\Models\\RecetaMedica.cs",
-              "RelativeToolTip": "Models\\RecetaMedica.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T14:22:35.058Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Mario\\Music\\PROYECTO-TOKEN\\BackendClinica\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Mario\\Music\\PROYECTO-TOKEN\\BackendClinica\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-09T18:39:02.479Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UsuariosController.cs",
+              "DocumentMoniker": "C:\\Users\\Mario\\Music\\PROYECTO-TOKEN\\BackendClinica\\Controllers\\UsuariosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsuariosController.cs",
+              "ToolTip": "C:\\Users\\Mario\\Music\\PROYECTO-TOKEN\\BackendClinica\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "Controllers\\UsuariosController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAiwDUAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T17:33:58.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RecetaMedica.cs",
+              "DocumentMoniker": "C:\\Users\\Mario\\Music\\PROYECTO-TOKEN\\BackendClinica\\Models\\RecetaMedica.cs",
+              "RelativeDocumentMoniker": "Models\\RecetaMedica.cs",
+              "ToolTip": "C:\\Users\\Mario\\Music\\PROYECTO-TOKEN\\BackendClinica\\Models\\RecetaMedica.cs",
+              "RelativeToolTip": "Models\\RecetaMedica.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T14:22:35.058Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "RecetasMedicasController.cs",
-              "DocumentMoniker": "C:\\Users\\Windows\\Desktop\\BackendClinica\\Controllers\\RecetasMedicasController.cs",
+              "DocumentMoniker": "C:\\Users\\Mario\\Music\\PROYECTO-TOKEN\\BackendClinica\\Controllers\\RecetasMedicasController.cs",
               "RelativeDocumentMoniker": "Controllers\\RecetasMedicasController.cs",
-              "ToolTip": "C:\\Users\\Windows\\Desktop\\BackendClinica\\Controllers\\RecetasMedicasController.cs",
+              "ToolTip": "C:\\Users\\Mario\\Music\\PROYECTO-TOKEN\\BackendClinica\\Controllers\\RecetasMedicasController.cs",
               "RelativeToolTip": "Controllers\\RecetasMedicasController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
