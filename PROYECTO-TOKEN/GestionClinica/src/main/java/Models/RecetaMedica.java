@@ -9,8 +9,8 @@ package Models;
  * @author Mario
  */
 public class RecetaMedica {
-    private int idreceta;
-    private int idpaciente;
+    private int idReceta;
+    private int idPaciente;
     private String pacienteNombre;
     private int idmedico;
     private String medicoNombre;
@@ -19,15 +19,15 @@ public class RecetaMedica {
 
     
     
-    public int getIdreceta() {
-        return idreceta;
+    public int getidReceta() {
+        return idReceta;
     }
 
-    public void setIdreceta(int idreceta) {
-        this.idreceta = idreceta;
+    public void setidReceta(int idreceta) {
+        this.idReceta = idreceta;
     }
 
-    public int getIdmedico() {
+    public int getidmedico() {
         return idmedico;
     }
     public String getMedicoNombre(){
@@ -37,7 +37,7 @@ public class RecetaMedica {
         this.medicoNombre = medicoNombre;
     }
 
-    public void setIdmedico(int idmedico) {
+    public void setidmedico(int idmedico) {
         this.idmedico = idmedico;
     }
 
@@ -65,12 +65,12 @@ public class RecetaMedica {
         this.pacienteNombre = pacienteNombre;
     }
 
-    public int getIdpaciente() {
-        return idpaciente;
+    public int getidPaciente() {
+        return idPaciente;
     }
 
-    public void setIdpaciente(int idpaciente) {
-        this.idpaciente = idpaciente;
+    public void setidPaciente(int idpaciente) {
+        this.idPaciente = idpaciente;
     }
     
     

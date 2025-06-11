@@ -9,8 +9,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 /**
  *
@@ -43,7 +46,20 @@ public class RecetaMedicaApi {
         in.close();
         return receta;
     }
+ // --- NUEVO MÉTODO: Buscar Recetas por Nombre (usando HttpURLConnection) ---
+   public List<RecetaMedica> buscarreceta(String dato) throws IOException {
+        URL url = new URL(BASE_URL);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Authorization", "Bearer " + TokenAPI.getToken());
 
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+            Type listType = new TypeToken<List<RecetaMedica>>() {
+            }.getType();
+            return gson.fromJson(in, listType);
+        }
+    }
+    // 
     public boolean addRecetaMedica(RecetaMedica receta) throws IOException {
         URL url = new URL(BASE_URL);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -63,7 +79,7 @@ public class RecetaMedicaApi {
     }
 
     public boolean updateRecetaMedica(RecetaMedica receta) throws IOException {
-        URL url = new URL(BASE_URL + "/" + receta.getIdreceta());
+        URL url = new URL(BASE_URL + "/" + receta.getidReceta());
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("PUT");
         con.setRequestProperty("Content-Type", "application/json");

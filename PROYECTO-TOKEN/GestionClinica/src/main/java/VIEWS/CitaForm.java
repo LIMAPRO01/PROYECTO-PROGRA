@@ -16,7 +16,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Models.ComboItem;
+
 
 
 public class CitaForm extends javax.swing.JFrame {
@@ -28,111 +28,7 @@ public class CitaForm extends javax.swing.JFrame {
     }
 
     public CitaForm() {
-        initComponents();
-        SetDate();
-        verCitas(); 
-         // ✅ Inicialización manual si no lo hiciste desde el diseñador
-        JComboPaciente = new JComboBox<>();
-        JComboMedico = new JComboBox<>();
-        cargarPacientesYMedicos();
-
-        jTable1.getSelectionModel().addListSelectionListener(e -> {
-            int selectedRow = jTable1.getSelectedRow();
-            if (!e.getValueIsAdjusting() && selectedRow != -1) {
-                
-                String fechaCita = jTable1.getValueAt(selectedRow, 5).toString();
-                String motivo = jTable1.getValueAt(selectedRow, 6).toString();
-                String estado = jTable1.getValueAt(selectedRow, 7).toString();
-
-                txtFC.setText(fechaCita);
-                txtMC.setText(motivo);
-                jCheckBoxActivo4.setSelected(estado.equalsIgnoreCase("Programada"));
-            }
-        });
     }
-       private void cargarPacientesYMedicos() {
-       try {
-            PacienteApi pacienteApi = new PacienteApi();
-            MedicoApi medicoApi = new MedicoApi();
-
-            List<Paciente> pacientes = pacienteApi.getAllPacientes();
-            List<Medico> medicos = medicoApi.getAllMedicos();
-
-            // ✅ Cargar pacientes
-          ComboItem itemPaciente = (ComboItem) JComboPaciente.getSelectedItem();
-if (itemPaciente != null) {
-    String nombrePaciente = itemPaciente.getValue();
-    int idPaciente = itemPaciente.getId();
-} else {
-    System.out.println("⚠️ No hay paciente seleccionado aún.");
-
- 
-            }
-
-            // ✅ Cargar médicos
-            ComboItem itemMedico = (ComboItem) JComboMedico.getSelectedItem();
-if (itemMedico != null) {
-    String nombreMedico = itemMedico.getValue();
-    int idMedico = itemMedico.getId();
-} else {
-    System.out.println("⚠️ No hay médico seleccionado aún.");
-}
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al cargar pacientes o médicos.");
-        }
-    }
-
-    private void SetDate() {
-        LocalDate now = LocalDate.now();
-        int year = now.getYear();
-        int dia = now.getDayOfMonth();
-        int month = now.getMonthValue();
-        String[] meses = {
-            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-        };
-        fecha.setText("Hoy es " + dia + " de " + meses[month - 1] + " de " + year);
-    }
-
-    private void llenarTablaConPacientes(List<Cita> citas) {
-        try {
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.setRowCount(0);
-
-            for (Cita c : citas) {
-                model.addRow(new Object[]{
-                    c.getIdCita(),
-                    c.getIdPaciente(),
-                    c.getPacienteNombre(),
-                    c.getIdMedico(),
-                    c.getMedicoNombre(),
-                    c.getFechaCita(),
-                    c.getMotivo(),
-                    c.getEstado(),
-                    c.getFechaRegistro(),
-                });
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-//TOKEN
-private void verCitas() {
-   try {
-        String token = TokenAPI.getToken(); // Genera nuevo token cada vez
-        CitaApi api = new CitaApi();
-        List<Cita> citas = api.getAllCitas();
-        llenarTablaConPacientes(citas);
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error al cargar pacientes: " + e.getMessage());
-    }
-}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -464,71 +360,7 @@ private void verCitas() {
     }//GEN-LAST:event_jCheckBoxActivo4ActionPerformed
 
     private void BtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActualizarActionPerformed
-try {
-        int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Selecciona u   na cita para actualizar.");
-            return;
-        }
 
-        // Obtener el ID de la cita desde la tabla
-        int idCita = Integer.parseInt(jTable1.getValueAt(selectedRow, 0).toString());
-
-        // Obtener objetos seleccionados del JComboBox
-        ComboItem p = (ComboItem) JComboPaciente.getSelectedItem();
-ComboItem m = (ComboItem) JComboMedico.getSelectedItem();
-
-        if (p == null || m == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un paciente y un médico.");
-            return;
-        }
-
-        // Obtener otros datos del formulario
-        String fechaCita = txtFC.getText().trim();
-        String motivo = txtMC.getText().trim();
-        String estado = jCheckBoxActivo4.isSelected() ? "Programada" : "Cancelada";
-
-        if (fechaCita.isEmpty() || motivo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor completa todos los campos obligatorios.");
-            return;
-        }
-
-        // Convertir fecha al formato yyyy-MM-dd
-        DateTimeFormatter formatoEsperado = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate fecha = LocalDate.parse(fechaCita, formatoEsperado);
-        String fechaFormateada = fecha.toString(); // yyyy-MM-dd
-        String fechaHoy = LocalDate.now().format(formatoEsperado);
-
-        // Crear el objeto Cita
-        Cita cita = new Cita();
-        cita.setIdCita(idCita);
-        cita.setIdPaciente(p.getId());
-        cita.setIdMedico(m.getId());
-        cita.setFechaCita(fechaFormateada);
-        cita.setMotivo(motivo);
-        cita.setEstado(estado);
-        cita.setFechaRegistro(fechaHoy);
-        cita.setPacienteNombre(p.toString()); // Solo para mostrar, opcional
-        cita.setMedicoNombre(m.toString());   // Solo para mostrar, opcional
-
-        // Llamar a la API
-        CitaApi api = new CitaApi();
-        boolean resultado = api.updateCita(cita);
-
-        if (resultado) {
-            JOptionPane.showMessageDialog(this, "Cita actualizada correctamente.");
-            limpiarCampos();
-            verCitas();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al actualizar la cita.");
-        }
-
-    } catch (DateTimeParseException e) {
-        JOptionPane.showMessageDialog(this, "La fecha debe tener el formato dd-MM-yyyy.");
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
-    }
     }//GEN-LAST:event_BtnActualizarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
@@ -551,7 +383,7 @@ ComboItem m = (ComboItem) JComboMedico.getSelectedItem();
                 boolean resultado = api.deleteCita(id);
                 if (resultado) {
                     JOptionPane.showMessageDialog(this, "Paciente eliminado correctamente.");
-                    verCitas(); // Refresca la tabla
+                    //verCitas(); // Refresca la tabla
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al eliminar el paciente.");
                 }
@@ -563,81 +395,6 @@ ComboItem m = (ComboItem) JComboMedico.getSelectedItem();
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-                                           
-    try {
-        // Obtener objetos seleccionados de los JComboBox
-        ComboItem itemPaciente = (ComboItem) JComboPaciente.getSelectedItem();
-ComboItem itemMedico = (ComboItem) JComboMedico.getSelectedItem();
-
-if (itemPaciente == null || itemMedico == null) {
-    JOptionPane.showMessageDialog(this, "Debe seleccionar un paciente y un médico.");
-    return;
-}
-
-int idPaciente = itemPaciente.getId();
-int idMedico = itemMedico.getId();
-String nombrePaciente = itemPaciente.getValue();
-String nombreMedico = itemMedico.getValue();
-
-
-        if (itemPaciente == null || itemMedico == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un paciente y un médico.");
-            return;
-        }
-
-        
-        String fechaCita = txtFC.getText().trim(); // dd-MM-yyyy
-        String motivo = txtMC.getText().trim();
-
-        if (fechaCita.isEmpty() || motivo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos obligatorios.");
-            return;
-        }
-
-        // Convertir fecha al formato yyyy-MM-dd
-        DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate fecha = LocalDate.parse(fechaCita, formatoEntrada);
-        String fechaFormateada = fecha.toString(); // yyyy-MM-dd
-        String fechaHoy = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
-        // Verificar si la cita ya existe (opcional)
-        List<Cita> listaCitas = new CitaApi().getAllCitas();
-        boolean existente = listaCitas.stream()
-            .anyMatch(c -> c.getIdPaciente() == idPaciente && c.getFechaCita().equals(fechaFormateada));
-
-        if (existente) {
-            JOptionPane.showMessageDialog(this, "La cita ya está registrada.");
-            return;
-        }
-
-        // Crear la nueva cita
-        Cita c = new Cita();
-        c.setIdPaciente(idPaciente);
-        c.setIdMedico(idMedico);
-        c.setFechaCita(fechaFormateada);
-        c.setMotivo(motivo);
-        c.setFechaRegistro(fechaHoy);
-        c.setEstado("Programada");
-        c.setPacienteNombre(itemPaciente.toString());
-        c.setMedicoNombre(itemMedico.toString());
-
-        // Guardar la cita
-        boolean resultado = new CitaApi().addCita(c);
-        if (resultado) {
-            JOptionPane.showMessageDialog(this, "Cita agregada correctamente.");
-            limpiarCampos();
-            verCitas();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al agregar la cita.");
-        }
-
-    } catch (DateTimeParseException e) {
-        JOptionPane.showMessageDialog(this, "La fecha debe tener el formato dd-MM-yyyy.");
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error al agregar cita: " + ex.getMessage());
-    }
-
 
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
@@ -660,7 +417,7 @@ String nombreMedico = itemMedico.getValue();
                 JOptionPane.showMessageDialog(this, "No se encontraron pacientes con esos datoa.");
                 return;
             }else {
-                llenarTablaConPacientes(pacientes);
+               // llenarTablaConPacientes(pacientes);
             }
 
         } catch (Exception ex) {

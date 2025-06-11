@@ -98,7 +98,12 @@ public class Medico {
         
         public String getEstado() { return estado; } 
         public void setEstado(String estado) { this.estado = estado; } 
-
-    
+        
+       
+       @Override
+public String toString() {
+    return nombre + " " + apellido ; // Esto es lo que se mostrará en el JComboBox
 }
+    }
+    
 
