@@ -152,7 +152,7 @@ namespace BackendClinica.Data
             {
                 entity.HasKey(e => e.IdReceta);
                 entity.Property(e => e.IdPaciente).IsRequired();
-                entity.Property(e => e.IdMedico).IsRequired();
+                entity.Property(e => e.idmedico).IsRequired();
                 entity.Property(e => e.Indicaciones).HasMaxLength(500);
                 entity.Property(e => e.FechaEmision).IsRequired();
 
@@ -164,7 +164,7 @@ namespace BackendClinica.Data
 
                 entity.HasOne(e => e.Medico)
                     .WithMany()
-                    .HasForeignKey(e => e.IdMedico)
+                    .HasForeignKey(e => e.idmedico)
                     .OnDelete(DeleteBehavior.Restrict);
             });
 

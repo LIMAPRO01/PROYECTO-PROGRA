@@ -99,6 +99,7 @@ public class RecetaMedicaForm extends JFrame {
        
         jComboBoxNP.setSelectedIndex(-1); 
         jComboBoxNM.setSelectedIndex(-1);
+        jTable1.clearSelection();
     }
 
   private void SetDate() {

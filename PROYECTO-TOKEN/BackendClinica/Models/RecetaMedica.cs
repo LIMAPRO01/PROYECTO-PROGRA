@@ -4,7 +4,7 @@ namespace BackendClinica.Models
     {
         public int IdReceta { get; set; }
         public int IdPaciente { get; set; }
-        public int IdMedico { get; set; }
+        public int idmedico { get; set; }
         public string? Indicaciones { get; set; }
         public DateTime FechaEmision { get; set; } = DateTime.Now;
 

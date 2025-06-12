@@ -24,7 +24,7 @@ namespace BackendClinica.Controllers
                     r.IdReceta,
                     r.IdPaciente,
                     PacienteNombre = r.Paciente != null ? r.Paciente.Nombre + " " + r.Paciente.Apellido : "",
-                    r.IdMedico,
+                    r.idmedico,
                     MedicoNombre = r.Medico != null ? r.Medico.Nombre + " " + r.Medico.Apellido : "",
                     r.Indicaciones,
                     r.FechaEmision
@@ -56,7 +56,7 @@ namespace BackendClinica.Controllers
             var r = await _context.Set<RecetaMedica>().FindAsync(id);
             if (r == null) return NotFound();
             r.IdPaciente = actualizada.IdPaciente;
-            r.IdMedico = actualizada.IdMedico;
+            r.idmedico = actualizada.idmedico;
             r.Indicaciones = actualizada.Indicaciones;
             r.FechaEmision = actualizada.FechaEmision;
             await _context.SaveChangesAsync();

@@ -2448,7 +2448,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "idMedico": {
+          "idmedico": {
             "type": "integer",
             "format": "int32"
           },
