@@ -95,6 +95,7 @@ API\RecetaMedicaApi$1.class
 Models\Factura.class
 VIEWS\Mainframe$6.class
 VIEWS\MedicoForm$11.class
+API\FacturaApi.class
 VIEWS\Login$3.class
 VIEWS\MedicoForm$1.class
 VIEWS\MedicamentoForm$1.class
