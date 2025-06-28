@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "dTdSk+nN2G0cAxO8UNP9UXFMCf1jvyLgHcHE2A3t0i0=",
+  "Source": "BackendClinica",
+  "BasePath": "_content/BackendClinica",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
